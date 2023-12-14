@@ -24,11 +24,8 @@ class State(BaseModel, Base):
     @property
     def cities(self):
         """Returns the list of cities associated with this state."""
-        if getenv("HBNB_TYPE_STORAGE") == "db":
-            return [city for city in self.cities]
-        else:
-            cities_list = []
-            for city in models.storage.all(City).values():
-                if self.id == city.state_id:
-                    cities_list.append(city)
-            return cities_list
+        cities_list = []
+        for city in models.storage.all(City).values():
+            if self.id == city.state_id:
+                cities_list.append(city)
+        return cities_list
